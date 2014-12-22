@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/unibot/unibot-karma/issues"
   },
-  "homepage": "https://github.com/unibot/unibot-karma"
+  "homepage": "https://github.com/unibot/unibot-karma",
+  "dependencies": {
+    "mongoose": "^3.8.21"
+  }
 }
