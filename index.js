@@ -23,7 +23,7 @@ function cleanName(input) {
 
 var plugin = function(channel, config){
 
-  var karma,
+  var karma = { karma: {} },
       cooldown = {};
 
   model.findOne({ channel: channel.id }, function(err, _karma_){
