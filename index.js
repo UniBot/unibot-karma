@@ -84,7 +84,7 @@ module.exports = function init(options){
 
     return {
       "^(\\S+)\\+\\+$": function(from, matches) {
-        if (bot.chans[channel.name].users[matches[1]] === undefined) return channel.say(from + ': no nick matching that was found');
+        if (bot.chans[channel.name].users[matches[1]] === undefined) return;
         matches[1] = cleanName(matches[1]);
         if (from.toLowerCase() == matches[1]) return;
         if (cooldown[from]) return channel.say(from + ': you must wait an hour between giving karma');
@@ -93,7 +93,7 @@ module.exports = function init(options){
         saveKarma(from, matches[1]);
       },
       "^(\\S+)\\-\\-$": function(from, matches) {
-        if (bot.chans[channel.name].users[matches[1]] === undefined) return channel.say(from + ': no nick matching that was found');
+        if (bot.chans[channel.name].users[matches[1]] === undefined) return;
         matches[1] = cleanName(matches[1]);
         if (from.toLowerCase() == matches[1]) return;
         if (cooldown[from]) return channel.say(from + ': you must wait an hour between giving karma');
