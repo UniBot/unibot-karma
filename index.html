@@ -1,16 +1,16 @@
-<div class="karma">
+<div class="karma" ng-init="karmas=(toArray(plugin.karma)|orderBy:'value':true)">
 	<ul>
 		<li><strong>Add Karma:</strong> <code>[nick]++</code></li>
 		<li><strong>Remove Karma:</strong> <code>[nick]--</code></li>
 		<li><strong>Check Karma:</strong> <code>!karma [nick]</code> [nick] is optional (returns your own karma)</li>
 	</ul>
-	<form class="form-group">
+	<form class="form-group" ng-init="filter=''">
 		<div class="input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
 			<input class="form-control" ng-model="filter" placeholder="Filter" type="search">
 		</div>
 	</form>
-	<dl class="dl-horizontal" ng-repeat="karma in karmas | orderBy: 'value': true | filter: {key:filter}">
+	<dl class="dl-horizontal" ng-repeat="karma in karmas | filter: filter track by $index">
 		<dt>{{karma.key}}:</dt> <dd>{{karma.value}}</dd>
 	</dl>
 </div>

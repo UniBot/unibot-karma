@@ -32,7 +32,7 @@ module.exports = function init(options){
 
 
   webserver.get('/karma', function(req, res, next){
-    res.sendFile('./index.html');
+    res.sendFile(__dirname + '/index.html');
   });
 
   webserver.get('/karma/:channel', function(req, res, next) {
@@ -84,6 +84,7 @@ module.exports = function init(options){
 
     return {
       "^(\\S+)\\+\\+$": function(from, matches) {
+        if (bot.chans[channel.name].users[matches[1]] === undefined) return channel.say(from + ': no nick matching that was found');
         matches[1] = cleanName(matches[1]);
         if (from.toLowerCase() == matches[1]) return;
         if (cooldown[from]) return channel.say(from + ': you must wait an hour between giving karma');
@@ -92,6 +93,7 @@ module.exports = function init(options){
         saveKarma(from, matches[1]);
       },
       "^(\\S+)\\-\\-$": function(from, matches) {
+        if (bot.chans[channel.name].users[matches[1]] === undefined) return channel.say(from + ': no nick matching that was found');
         matches[1] = cleanName(matches[1]);
         if (from.toLowerCase() == matches[1]) return;
         if (cooldown[from]) return channel.say(from + ': you must wait an hour between giving karma');
@@ -100,10 +102,11 @@ module.exports = function init(options){
         saveKarma(from, matches[1]);
       },
       "^!karma(?: (\\S+))?$": function(from, matches) {
-        if (matches[1]) from = matches[1];
-        from = cleanName(from);
-        checkKarma(from);
-        sayKarma(from);
+        if (matches[1]) nick = matches[1];
+        nick = cleanName(nick);
+        if (bot.chans[channel.name].users[nick] === undefined) return channel.say(from + ': no nick matching that was found');
+        checkKarma(nick);
+        sayKarma(nick);
       }
     };
   };
