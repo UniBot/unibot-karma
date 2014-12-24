@@ -32,7 +32,7 @@ module.exports = function init(options){
 
 
   webserver.get('/karma', function(req, res, next){
-    res.sendFile('index.html');
+    res.sendFile('./index.html');
   });
 
   webserver.get('/karma/:channel', function(req, res, next) {
