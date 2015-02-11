@@ -102,7 +102,7 @@ module.exports = function init(options){
         saveKarma(from, matches[1]);
       },
       "^!karma(?: (\\S+))?$": function(from, matches) {
-        if (matches[1]) nick = matches[1];
+        nick = matches[1] ? matches[1] : from;
         nick = cleanName(nick);
         if (bot.chans[channel.name].users[nick] === undefined) return channel.say(from + ': no nick matching that was found');
         checkKarma(nick);
